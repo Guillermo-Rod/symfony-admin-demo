@@ -1,0 +1,13 @@
+#  To load from controllers attribute
+#
+# controllers:
+#     resource:
+#         path: ../src/Controller/
+#         namespace: App\Controller
+#     type: attribute
+
+# To load as php routes
+#
+controllers:
+    resource: routes/app_routes.php
+    type: php

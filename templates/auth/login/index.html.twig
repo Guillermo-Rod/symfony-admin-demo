@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+<style>
+    body {
+        background-color: #aeaeae;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <div class="d-flex justify-content-center my-4">
+        <div class="shadow-lg rounded w-50 bg-white">
+            <form action="{{ path('app_auth_login') }}" method="post" class="p-3">
+                <h3 class="mb-3">Login</h3>
+
+                {% include 'components/input.html.twig' with {
+                    id: 'email',
+                    type: 'email',
+                    label: 'Email',
+                    name: '_username',
+                    value: last_username
+                } %}
+
+                {% include 'components/input.html.twig' with {
+                    id: 'password',
+                    type: 'password',
+                    label: 'Contrasena',
+                    name: '_password',
+                } %}
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <input type="hidden" name="_target_path" value="/admin/dashboard">
+
+                <button type="submit" class="btn btn-primary">Iniciar sesion</button>
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}
